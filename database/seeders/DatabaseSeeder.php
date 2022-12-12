@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             MovieDatabaseSeeder::class,
             ShowtimesSeeder::class,
             MovieRatingSeeder::class,
-            MovieGenrePivotSeeder::class,
+            // MovieGenrePivotSeeder::class,
             MoviePerformerPivotSeeder::class,
             MovieDirectorPivotSeeder::class,
             MovieLanguagePivotSeeder::class,

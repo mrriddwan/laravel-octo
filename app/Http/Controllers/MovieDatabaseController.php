@@ -188,34 +188,57 @@ class MovieDatabaseController extends Controller
 
     public function add_movie(Request $request)
     {
-        $request->validate([
-            'title' => ['required', 'string'],
-            'release' => ['required', 'string'],
-            'length' => ['required', 'string'],
-            'description' => ['required', 'string'],
-            'mpaa_rating' => ['required', 'string'],
-            'director' => ['required', 'string'],
-            'language' => ['required', 'string'],
-            'genre' => ['required', 'string'],
-            'performer' => ['required', 'string'],
-        ]);
+        // $request->validate([
+        //     'title' => ['required', 'string'],
+        //     'release' => ['required', 'string'],
+        //     'length' => ['required', 'string'],
+        //     'description' => ['required', 'string'],
+        //     'mpaa_rating' => ['required', 'string'],
+        //     'director' => ['required', 'string'],
+        //     'language' => ['required', 'string'],
+        //     'genre' => ['required', 'string'],
+        //     'performer' => ['required', 'string'],
+        // ]);
 
-        $movie = Movie::create([
-            'movie_title' => $request->title,
-            'movie_release_date' => Carbon::parse($request->release)->toDate(),
-            'movie_length' => $request->length,
-            'movie_desc' => $request->description,
-            'mpaa_rating' => $request->mpaa_rating,
-        ]);
-        Movie::where('id', $movie->id)->get()->genre()->sync((MovieGenre::where('movie_genres.genre_name', '=', $request['genre'])->value('id')));
-        Movie::where('id', $movie->id)->performer()->sync(MoviePerformer::where('movie_performers.performer_name', '=', $request['performer'])->value('id'));
-        Movie::where('id', $movie->id)->language()->sync(MovieLanguage::where('movie_languages.language_name', '=', $request['language'])->value('id'));
-        Movie::where('id', $movie->id)->director()->sync(MovieDirector::where('movie_directors.director_name', '=', $request['director'])->value('id'));
+        // $movie = Movie::create([
+        //     'movie_title' => $request->title,
+        //     'movie_release_date' => Carbon::parse($request->release)->toDate(),
+        //     'movie_length' => $request->length,
+        //     'movie_desc' => $request->description,
+        //     'mpaa_rating' => $request->mpaa_rating,
+        // ]);
 
-        return response()->json([
-            "message" => "Successfully added movie " . $request->title . " with Movie_ID " . $movie->id, "success" => true,
-            // "message" => "Successfully added movie " . $request->title . " with Movie_ID " . 100, "success" => true,
-        ]);
+        // function genre($var)
+        // {
+        //     // returns whether the input integer is odd
+        //     return $var ;
+        // }
+
+        // print_r(array_filter($request->all(), "odd"));
+
+        $genres = [];
+
+        if($request['genre']){
+            array_push($genres,$request->genre);
+        }
+        dd($genres);
+
+        // foreach($genres as $genre ){
+        //     MovieGenrePivot::create([
+        //                 'movie_id' => $movie->id,
+        //                 'genre_id' => MovieGenre::where('movie_genres.genre_name', '=', $genre)->value('id')
+        //             ]);
+        // }
+        // $movie->genre()->sync(MovieGenre::where('movie_genres.genre_name', '=', $request['genre'])->value('id'));
+        // $movie->genre()->sync([1,2,3]);
+        // Movie::where('id', $movie->id)->performer()->sync(MoviePerformer::where('movie_performers.performer_name', '=', $request['performer'])->value('id'));
+        // Movie::where('id', $movie->id)->language()->sync(MovieLanguage::where('movie_languages.language_name', '=', $request['language'])->value('id'));
+        // Movie::where('id', $movie->id)->director()->sync(MovieDirector::where('movie_directors.director_name', '=', $request['director'])->value('id'));
+
+        // return response()->json([
+        //     // "message" => "Successfully added movie " . $request->title . " with Movie_ID " . $movie->id, "success" => true,
+        //     "message" => "Successfully added movie " . $request->title . " with Movie_ID " . 100, "success" => true,
+        // ]);
     }
 }
 
