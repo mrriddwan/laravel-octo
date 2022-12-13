@@ -188,31 +188,25 @@ class MovieDatabaseController extends Controller
 
     public function add_movie(Request $request)
     {
-        // $request->validate([
-        //     'title' => ['required', 'string'],
-        //     'release' => ['required', 'string'],
-        //     'length' => ['required', 'string'],
-        //     'description' => ['required', 'string'],
-        //     'mpaa_rating' => ['required', 'string'],
-        //     'director' => ['required', 'string'],
-        //     'language' => ['required', 'string'],
-        //     'genre' => ['required', 'string'],
-        //     'performer' => ['required', 'string'],
-        // ]);
+        $request->validate([
+            'title' => ['required', 'string'],
+            'release' => ['required', 'string'],
+            'length' => ['required', 'string'],
+            'description' => ['required', 'string'],
+            'mpaa_rating' => ['required', 'string'],
+            'director' => ['required', 'string'],
+            'language' => ['required', 'string'],
+            'genre' => ['required', 'string'],
+            'performer' => ['required', 'string'],
+        ]);
 
-        // $movie = Movie::create([
-        //     'movie_title' => $request->title,
-        //     'movie_release_date' => Carbon::parse($request->release)->toDate(),
-        //     'movie_length' => $request->length,
-        //     'movie_desc' => $request->description,
-        //     'mpaa_rating' => $request->mpaa_rating,
-        // ]);
-
-        // function genre($var)
-        // {
-        //     // returns whether the input integer is odd
-        //     return $var ;
-        // }
+        $movie = Movie::create([
+            'movie_title' => $request->title,
+            'movie_release_date' => Carbon::parse($request->release)->toDate(),
+            'movie_length' => $request->length,
+            'movie_desc' => $request->description,
+            'mpaa_rating' => $request->mpaa_rating,
+        ]);
 
         // print_r(array_filter($request->all(), "odd"));
 
